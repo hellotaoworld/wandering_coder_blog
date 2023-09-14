@@ -35,10 +35,44 @@ export const getPosts = async () => {
     }
   `
 
-  const results = await request(graphqlAPI, query)
+  const result = await request(graphqlAPI, query)
 
-  return results.postsConnection.edges;
+  return result.postsConnection.edges;
 }
+
+export const getPostDetails = async (slug) => {
+  const query = gql`
+    query GetPostDetails($slug : String!) {
+      post(where: {slug: $slug}) {
+        title
+        excerpt
+        featuredImage {
+          url
+        }
+        author{
+          name
+          bio
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        content {
+          raw
+        }
+        categories {
+          name
+          slug
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.post;
+};
 
 
 export const getRecentPosts = async () => {
@@ -100,4 +134,17 @@ export const getCategories = async () => {
   `
   const results = await request(graphqlAPI, query);
   return results.categories;
+}
+
+// async function to accept the comment object. This is to make an HTTP request to our api backend.
+export const submitComment = async (obj) => {
+  const result = await fetch('/api/comments', {
+    method: 'POST',
+    header: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj),
+  });
+
+  return result.json();
 }
