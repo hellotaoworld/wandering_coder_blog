@@ -8,7 +8,7 @@ export default function Home({ posts }) {
   return (
     <main>
       <div className='container mx-auto px-10 mb-8'>
-        <Head><title> Blog</title>
+        <Head><title>The Wandering Coder</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 

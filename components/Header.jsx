@@ -16,12 +16,18 @@ const Header = () => {
             <div className=''>
                 <div>
                     <Link href="/">
-                        <span className='mt-4 ml-4 cursor-pointer font-bold text-4xl text-white'>Graph CMS</span>
+                        <span className='mt-4 ml-4 cursor-pointer font-bold text-4xl text-white'>The Wandering Coder</span>
                     </Link>
                 </div>
                 <div className='hidden md:float-left md:contents'>
-                    {categories.map((category) => (
-                        <Link key={category.slug} href={'/category/${category.slug}'}>
+                    <Link href={`/about`}>
+                        <span className='md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer'>
+                            ⭐About Us
+                        </span>
+                    </Link>
+                    {' '}
+                    {categories.map((category, index) => (
+                        <Link key={index} href={`/category/${category.slug}`}>
                             <span className='md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer'>
                                 {category.name}
                             </span>

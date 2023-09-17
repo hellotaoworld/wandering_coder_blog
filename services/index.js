@@ -230,3 +230,24 @@ export const getCategoryPosts = async (slug) => {
 
   return result.postsConnection.edges;
 };
+
+
+export const getAuthors = async () => {
+  const query = gql`
+    query getAuthors {
+      authors {
+        bio
+        name
+        id
+        photo {
+          url
+        }
+      }
+      
+
+    }
+  
+  `
+  const results = await request(graphqlAPI, query);
+  return results.authors;
+}
