@@ -21,12 +21,42 @@ const PostDetail = ({ post }) => {
         }
 
         switch (type) {
+            case 'heading-one':
+                return <h1 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h1>;
+            case 'heading-two':
+                return <h2 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h2>;
             case 'heading-three':
                 return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
-            case 'paragraph':
-                return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
             case 'heading-four':
                 return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
+            case 'heading-five':
+                return <h5 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h5>;
+            case 'paragraph':
+                return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
+            case 'block-quote':
+                return <blockquote key={index} className="mb-8 bg-gray-200 p-8 text-gray italic text-md">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</blockquote>;
+            case 'code-block':
+                return <div key={index} className="mb-4 bg-gray-200 p-8 text-gray-600 text-md border-l-4 border-pink-300">
+                    <pre className='whitespace-pre-wrap '><code>
+                        {modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}
+                    </code></pre>
+                </div>;
+            case 'numbered-list':
+                return <div key={index} >
+                    <ol className="mb-4 text-md list-decimal ml-6">
+                        {modifiedText.map((item, i) => (
+                            <li key={i}><React.Fragment>{item}</React.Fragment></li>
+                        )
+                        )}
+                    </ol></div>;
+            case 'bulleted-list':
+                return <div key={index} >
+                    <ul className="mb-4 text-md list-disc ml-6">
+                        {modifiedText.map((item, i) => (
+                            <li key={i}><React.Fragment>{item}</React.Fragment></li>
+                        )
+                        )}
+                    </ul></div>;
             case 'image':
                 return (
                     <img
@@ -35,6 +65,7 @@ const PostDetail = ({ post }) => {
                         height={obj.height}
                         width={obj.width}
                         src={obj.src}
+                        className='p-8'
                     />
                 );
             default:
@@ -68,10 +99,10 @@ const PostDetail = ({ post }) => {
 
                 </div>
                 <div className='flex items-center mb-6 w-full'>
-                    <div className="font-medium text-gray-700">{post.categories.name}
+                    <div className="font-medium text-gray-700">
                         {post.categories.map((category, index) => {
                             return (
-                                <p className="transition duration-500 ease inline-block bg-gray-200 text-lg text-gray-700 px-3 py-1 rounded-full cursor-pointer hover:bg-pink-300 mr-3" key={index}>
+                                <p className="text-sm transition duration-500 ease inline-block bg-gray-200 text-lg text-gray-700 px-3 py-1 rounded-full mr-3" key={index}>
                                     {category.name}
                                 </p>
                             )
@@ -83,8 +114,35 @@ const PostDetail = ({ post }) => {
 
                 <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
                 {post.content.raw.children.map((typeObj, index) => {
-                    const children = typeObj.children.map((item, itemindex) => getContentFragment(itemindex, item.text, item));
+                    // Outer loop on typeObj
+                    //console.log(typeObj);
 
+                    let children = typeObj.children.map((item, itemindex) => {
+                        // inner loop
+                        switch (typeObj.type) {
+                            case 'bulleted-list':
+                            case "numbered-list":
+                                let s = [];
+                                item.children[0].children.map((sentence, sentenceindex) => {
+                                    s.push(sentence.text);
+                                })
+                                //console.log(s.join(''));
+                                //console.log("case1");
+                                return s.join('');
+                            case "code-block":
+                                //console.log(item.children[0]);
+                                //console.log("case2");
+                                return item.children[0].text;
+
+                            default:
+                                //console.log(item);
+                                return item.text;
+
+                        }
+                    }
+                    );
+
+                    //console.log(children);
                     return getContentFragment(index, children, typeObj, typeObj.type);
                 })}
             </div>
