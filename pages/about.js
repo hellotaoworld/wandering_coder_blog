@@ -11,11 +11,11 @@ const about = ({ authors }) => {
                 <div>
                     <h1 className="mt-4 mb-4 text-xl font-bold">Welcome to The Wandering Coder!</h1>
                     <h3 className="mt-4 mb-4 text-xl">
-                        👋 Hello and a big, hearty welcome to all our amazing readers! We're thrilled you've decided to join us on this exciting journey through the worlds of travel, self-improvement, web development, and lifestyle.
+                        👋 Hello and a big, hearty welcome to all our amazing readers! We&apos;re thrilled you&apos;ve decided to join us on this exciting journey through the worlds of travel, self-improvement, web development, and lifestyle.
 
                     </h3>
                     <h3 className="mt-4 mb-4 text-xl">
-                        🌍 Why 'The Wandering Coder'?
+                        🌍 Why &apos;The Wandering Coder&apos;?
                         We believe life is a tapestry of experiences—some technological, some personal, and some that make you want to pack a bag and explore the world. So, why limit ourselves to just one aspect? Here, we wander through various facets of life, from the intricate details of coding to the broad, beautiful landscapes of our world.
                     </h3>
                     <br />
