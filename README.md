@@ -6,6 +6,6 @@
 This is a Blog Application project, built and deployed with the following technologies:
 <ul>
   <li><b>Framework</b>:Next.JS + Tailwind CSS</li>
-  <li><b>Database</b>: GraphQL, with a cloud content management system hygraph that allow bloggers manage blog posts and comments</li>
+  <li><b>Database</b>: GraphQL, with a cloud content management system hygraph</li>
   <li><b>Sample Content</b>: ChatGPT</li>
 </ul>
