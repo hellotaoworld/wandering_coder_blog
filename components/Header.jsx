@@ -12,11 +12,11 @@ const Header = () => {
     }, []);
 
     return (
-        <div className='container mx-auto px-10 mb-8'>
-            <div className='border-b w-full inline-block border-blue-400 py-8'>
-                <div className='md:float-left block'>
+        <div className='container px-10 py-8 pb-8 mb-8 sticky top-0 w-full z-50 bg-sky-600 max-w-full border-b border-blue-500'>
+            <div className=''>
+                <div>
                     <Link href="/">
-                        <span className='cursor-pointer font-bold text-4xl text-white'>Graph CMS</span>
+                        <span className='mt-4 ml-4 cursor-pointer font-bold text-4xl text-white'>Graph CMS</span>
                     </Link>
                 </div>
                 <div className='hidden md:float-left md:contents'>
@@ -28,8 +28,8 @@ const Header = () => {
                         </Link>
                     ))}
                 </div>
-            </div>
 
+            </div>
 
         </div>
     )

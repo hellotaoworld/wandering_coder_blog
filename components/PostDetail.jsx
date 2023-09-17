@@ -49,13 +49,12 @@ const PostDetail = ({ post }) => {
                 <img src={post.featuredImage.url} alt="" className="object-top h-full w-full object-cover  shadow-lg rounded-t-lg lg:rounded-lg" />
             </div>
             <div className="px-4 lg:px-0">
-                <div className="flex items-center mb-8 w-full">
+                <div className="flex items-center mb-2 w-full">
                     <div className="hidden md:flex items-center justify-center lg:mb-0 lg:w-auto mr-8 items-center">
                         <img
                             alt={post.author.name}
-                            height="30px"
-                            width="30px"
-                            className="align-middle rounded-full"
+                            width={30}
+                            className="align-middle rounded-full userimage"
                             src={post.author.photo.url}
                         />
                         <p className="inline align-middle text-gray-700 ml-2 font-medium text-lg">{post.author.name}</p>
@@ -66,7 +65,22 @@ const PostDetail = ({ post }) => {
                         </svg>
                         <span className="align-middle">{moment(post.createdAt).format('MMM DD, YYYY')}</span>
                     </div>
+
                 </div>
+                <div className='flex items-center mb-6 w-full'>
+                    <div className="font-medium text-gray-700">{post.categories.name}
+                        {post.categories.map((category, index) => {
+                            return (
+                                <p className="transition duration-500 ease inline-block bg-gray-200 text-lg text-gray-700 px-3 py-1 rounded-full cursor-pointer hover:bg-pink-300 mr-3" key={index}>
+                                    {category.name}
+                                </p>
+                            )
+                        })
+                        }
+
+                    </div>
+                </div>
+
                 <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
                 {post.content.raw.children.map((typeObj, index) => {
                     const children = typeObj.children.map((item, itemindex) => getContentFragment(itemindex, item.text, item));
